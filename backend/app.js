@@ -1,3 +1,4 @@
+//Variables
 const express = require("express");
 
 const mongoose = require("mongoose");
@@ -8,6 +9,7 @@ const path = require('path');
 
 const app = express();
 
+//Connexion a la base de données
 mongoose
   .connect(
     "mongodb+srv://Dennis:9iZyAqqxajqThPVk@cluster0.xdu660i.mongodb.net/?retryWrites=true&w=majority",
@@ -16,8 +18,10 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
+//Toutes les requêtes utilisent express
 app.use(express.json());
 
+//Headers utilisés pour toutes les requêtes
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -33,7 +37,7 @@ app.use((req, res, next) => {
 
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images'))); //Gestion des images via le sous dossier /images
 
 
 module.exports = app;

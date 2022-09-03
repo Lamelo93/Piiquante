@@ -1,9 +1,15 @@
+//Sauce controllers
 const Sauce = require('../models/Sauce');
-const fs = require('fs');
+// On utilise le package fs pour accéder ausystème de fichiers et supprimer des fichiers
+const fs = require('fs'); 
 
+
+//Creation d'une sauce
 exports.createSauce = (req, res, next) => {
-  const sauceObject = JSON.parse(req.body.sauce);
-  delete sauceObject._id;
+  //On récupère l'objet sauce
+  const sauceObject = JSON.parse(req.body.sauce); 
+  //les identifiants ne doivent pas venir de l'utilisateur ou du frontend
+  delete sauceObject._id; 
   delete sauceObject._userId;
   const sauce = new Sauce({
       ...sauceObject,
@@ -16,6 +22,7 @@ exports.createSauce = (req, res, next) => {
   .catch(error => { res.status(400).json( { error })})
 };
 
+//Afficher une sauce
 exports.getOneSauce = (req, res, next) => {
   Sauce.findOne({
     _id: req.params.id
@@ -32,9 +39,9 @@ exports.getOneSauce = (req, res, next) => {
   );
 };
 
-/**
- * LIKE / DISLIKE UNE SAUCE
- */
+
+ //Like et dislike
+ 
  exports.likeSauce = (req, res, next) => {
   const userId = req.body.userId;
   const like = req.body.like;
@@ -78,7 +85,7 @@ exports.getOneSauce = (req, res, next) => {
       })
       .catch(error => res.status(500).json({ error }));
 };
-
+//Modifier une sauce
 exports.modifySauce = (req, res, next) => {
   const sauceObject = req.file ? {
       ...JSON.parse(req.body.sauce),
@@ -100,7 +107,7 @@ exports.modifySauce = (req, res, next) => {
           res.status(400).json({ error });
       });
 };
-
+//Supprimer une sauce
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id})
       .then(sauce => {
@@ -119,7 +126,7 @@ exports.deleteSauce = (req, res, next) => {
           res.status(500).json({ error });
       });
 };
-
+//Afficher toutes les sauces
 exports.getAllSauce = (req, res, next) => {
   Sauce.find().then(
     (sauces) => {
