@@ -1,6 +1,6 @@
 //Variables
 const jwt = require('jsonwebtoken');
-//Authentification avec mot de passe hash 
+//Authentification avec utilisation d'un token 
 module.exports = (req, res, next) => {
    try {
        const token = req.headers.authorization.split(' ')[1];

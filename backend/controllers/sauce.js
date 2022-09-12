@@ -1,6 +1,6 @@
 //Sauce controllers
 const Sauce = require('../models/Sauce');
-// On utilise le package fs pour accéder ausystème de fichiers et supprimer des fichiers
+// On utilise le package fs pour accéder au système de fichiers et supprimer des fichiers
 const fs = require('fs'); 
 
 
