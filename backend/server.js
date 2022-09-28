@@ -12,7 +12,8 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+//Soit une variable d'environnement, soit le port 3000 est utilisé pour le port
+const port = normalizePort(process.env.PORT || '3000'); 
 app.set('port', port);
  //Recherche les erreurs et les enregistre dans le serveur
 const errorHandler = error => {
@@ -43,5 +44,5 @@ server.on('listening', () => {
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
   console.log('Listening on ' + bind);
 });
-
+//Un  écouteur d'évènements consigne le port utilisé par le serveur
 server.listen(port);

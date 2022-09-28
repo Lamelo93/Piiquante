@@ -1,6 +1,10 @@
 //Variables
 const mongoose = require('mongoose');
 //Schema d'une sauce
+
+//La methode schema permet de créer un schéma des données
+
+//L'ID de la sauce sera généré par mongoose
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
@@ -15,4 +19,5 @@ const sauceSchema = mongoose.Schema({
   usersDisliked: { type: Array, default: [] },
 });
 
+//La méthode model transforme le schéma en modèle utilisable
 module.exports = mongoose.model('Sauce', sauceSchema);
